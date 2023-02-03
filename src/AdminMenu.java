@@ -4,6 +4,7 @@ import model.*;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class AdminMenu {
@@ -66,7 +67,7 @@ public class AdminMenu {
 //        System.out.println("SINGLE");
 //        System.out.println("DOUBLE");
 
-        RoomType roomType = RoomType.valueOf(scanner.nextLine());
+        RoomType roomType = RoomType.valueOf(scanner.nextLine().toUpperCase(Locale.ROOT));
 //
 //        if (roomType == RoomType.SINGLE){
 //            addRoomType(scanner) == 1;
