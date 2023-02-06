@@ -138,11 +138,14 @@ public class MainMenu {
 //        hotelResource.getCustomersReservations(customerEMail).forEach(reservation -> System.out.println("\n" + reservation));
 //        mainMenu();
         Collection<Reservation> reservations = hotelResource.getCustomersReservations(customerEMail);
+        System.out.println("Before reservation Loop");
 
         for (Reservation reservation : reservations) {
+            System.out.println("Inside reservation Loop");
             System.out.println(reservation);
-            mainMenu();
+//            mainMenu();
         }
+        mainMenu();
 
 //        if (hotelResource.getCustomersReservations(customerEMail) == null) {
 //            System.out.println("No reservations found.");

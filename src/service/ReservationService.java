@@ -66,8 +66,12 @@ public class ReservationService {
     public Collection<Reservation> getCustomersReservation (Customer customer) throws InstantiationException, IllegalAccessException {
         List<Reservation> reservationList = new ArrayList<Reservation>();
 
-        for (Reservation r: reservationList) {
-            System.out.println(r);
+        for (Reservation r: reservations) {
+            if (r.getCustomer().getEmail() == customer.getEmail()){
+                System.out.println("Printing Reservation" + r);
+                reservationList.add(r);
+            }
+//            System.out.println("Printing Reservation" + r.getCustomer().getEmail());
         }
 
         return reservationList;

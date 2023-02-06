@@ -4,6 +4,7 @@ import model.*;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class AdminMenu {
@@ -55,18 +56,26 @@ public class AdminMenu {
     }
 
     private static void addARoom() throws ParseException, InstantiationException, IllegalAccessException {
-        System.out.println("Enter Room #");
-        Scanner scanner = new Scanner(System.in);
-        String roomNumber = scanner.nextLine();
+        try {
+            System.out.println("Enter Room #");
+            Scanner scanner = new Scanner(System.in);
+            String roomNumber = scanner.nextLine();
 
-        System.out.println("Enter Price: ");
-        double roomPrice = Double.parseDouble(scanner.nextLine());
+            System.out.println("Enter Price: ");
+            Double roomPrice = null;
+            try {
+                roomPrice = Double.valueOf(scanner.nextLine());
+                System.out.println("You selected " + roomPrice);
+            } catch (Exception e) {
+                System.out.println("Invalid! Enter in double format: ex. 11.99");
+                return;
+            }
 
-        System.out.println("SINGLE or DOUBLE?");
-//        System.out.println("SINGLE");
-//        System.out.println("DOUBLE");
-
-        RoomType roomType = RoomType.valueOf(scanner.nextLine());
+//        System.out.println("SINGLE or DOUBLE?");
+////        System.out.println("SINGLE");
+////        System.out.println("DOUBLE");
+//
+//        RoomType roomType = RoomType.valueOf(scanner.nextLine().toUpperCase(Locale.ROOT));
 //
 //        if (roomType == RoomType.SINGLE){
 //            addRoomType(scanner) == 1;
@@ -76,22 +85,65 @@ public class AdminMenu {
 //            System.out.println("Invalid Input!");
 //        }
 
-        switch (roomType) {
-            case SINGLE:
-                System.out.println("Single");
-            break;
-            case DOUBLE:
-                System.out.println("Double");
-            break;
-            default:
-                System.out.println("Invalid Input!");
+
+//            System.out.println("SINGLE or DOUBLE?");
+//        System.out.println("SINGLE");
+//        System.out.println("DOUBLE");
+
+//            RoomType roomType = RoomType.valueOf(scanner.nextLine().toUpperCase(Locale.ROOT));
+//            RoomType roomType = RoomType.valueOf(scanner.nextLine().toUpperCase(Locale.ROOT));
+//            int roomTypeNum = scanner.nextInt();
+            try {
+                System.out.println("SINGLE or DOUBLE?");
+                RoomType roomType = RoomType.valueOf(scanner.nextLine());
+//                int roomTypeNum = scanner.nextInt();
+
+                switch (roomType) {
+                    case SINGLE:
+//                        roomType = RoomType.valueOf(scanner.nextLine().toUpperCase(Locale.ROOT));
+                        System.out.println("Single");
+                        break;
+                    case DOUBLE:
+                        System.out.println("Double");
+                        break;
+                    default:
+                        System.out.println("Invalid Input!");
+                        return;
+                }
+
+                Room room = new Room(roomNumber, roomPrice, roomType);
+
+                adminResource.addRoom(Collections.singletonList(room));
+                System.out.println("Room has been added to system");
+                adminMenu();
+
+            } catch (Exception e) {
+                System.out.println("Please make sure you spelled input correctly.");
+                System.out.println(e);
+//                continue;
+//                scanner.nextLine();
+            }
+
+        } catch (Exception e) {
+            System.out.println("");
         }
 
-        Room room = new Room(roomNumber, roomPrice, roomType);
+//        switch (roomType) {
+//            case SINGLE:
+//                System.out.println("Single");
+//            break;
+//            case DOUBLE:
+//                System.out.println("Double");
+//            break;
+//            default:
+//                System.out.println("Invalid Input!");
+//        }
 
-        adminResource.addRoom(Collections.singletonList(room));
-        System.out.println("Room has been added to system");
-        adminMenu();
+//        Room room = new Room(roomNumber, roomPrice, roomType);
+
+//        adminResource.addRoom(Collections.singletonList(room));
+//        System.out.println("Room has been added to system");
+//        adminMenu();
     }
 
     public static void displayAllReservations() throws ParseException, InstantiationException, IllegalAccessException {
