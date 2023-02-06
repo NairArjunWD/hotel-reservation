@@ -30,10 +30,12 @@ public class CustomerService {
 
     public Customer getCustomer(String customerEmail) {
         for (Customer customerEmails:customers) {
+            System.out.println("Inside CustomerService Customer Function");
             if (customerEmails.getEmail().equals(customerEmail)){
+                System.out.println("Inside CustomerService Found EMail");
                 return customerEmails;
             }
-            return null;
+//            return null;
         }
         return null;
     }

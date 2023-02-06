@@ -45,12 +45,15 @@ public class HotelResource {
     }
 
     public Collection<Reservation> getCustomersReservations(String customerEmail) throws InstantiationException, IllegalAccessException {
+        System.out.println("Inside Customer Reservation Function HotelResource");
+        System.out.println("Customer email: " + customerEmail);
         Customer customer = getCustomer(customerEmail);
 
         if (customer == null) {
+            System.out.println("Customer not found in Hotel Reservation in HotelResource");
             return Collections.emptyList();
         }
-        return reservationService.getCustomersReservation(getCustomer((customerEmail)));
+        return reservationService.getCustomersReservation(getCustomer(customerEmail));
     }
 
     public Collection<IRoom> findARoom(Date checkIn, Date checkOut) {
